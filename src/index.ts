@@ -1,4 +1,4 @@
-import { STARTS_WITH_SIGN } from "./const.js";
+const STARTS_WITH_SIGN = /^[+-].+/;
 
 const button = document.querySelector("#button");
 const resultsDiv = document.querySelector("#results")!;
