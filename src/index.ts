@@ -36,15 +36,18 @@ const getMatrix = (input: string[]) => {
   const height = +input?.[0];
   const width = +input?.[1];
   const matrix = input
-    .filter((line) => !STARTS_WITH_SIGN.test(line) && line.length > 1)
+    .filter(
+      (line) => !STARTS_WITH_SIGN.test(line) && line.split(" ").length > 1
+    )
     .map((line) => {
+      console.log(line);
       const lineCols = line.split(" ");
       const label = lineCols.shift();
       const values = lineCols.map((val) => +val);
 
       return { values, label };
     });
-
+  console.log(matrix);
   if (matrix.length !== height) {
     throw "wysokość macierzy nie zgadza się z tą zadeklarowaną";
   }
@@ -72,6 +75,7 @@ const getCriteria = (input: string[]) => {
       if (sign !== "+" && sign !== "-") {
         throw new Error("linie z kryteriami powinny zaczynać się od + lub -");
       }
+
       const weight = +wght;
 
       const plotPoints = plotPts.map((point) => {
@@ -87,8 +91,8 @@ const getCriteria = (input: string[]) => {
       plotPoints.forEach((point, index, array) => {
         if (index !== 0) {
           if (
-            (sign === "-" && array[index - 1][1] <= point[1]) ||
-            (sign === "+" && array[index - 1][1] >= point[1])
+            (sign === "-" && array[index - 1][1] < point[1]) ||
+            (sign === "+" && array[index - 1][1] > point[1])
           ) {
             throw new Error(
               "kryterium typu " +
