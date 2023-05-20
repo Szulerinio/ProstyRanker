@@ -126,7 +126,7 @@ const main = (input) => {
         return { label: row.label, value };
     });
     console.log(ranking);
-    ranking.sort((a, b) => a.value - b.value);
+    ranking.sort((a, b) => b.value - a.value);
     let resultHTML = "";
     for (let i = 0; i < ranking.length; i++) {
         if (i === 0 || ranking[i].value !== ranking[i - 1].value) {
